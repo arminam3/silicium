@@ -1,0 +1,30 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}
+    <h3 class="alert alert-primary text-center">دسته بندی: {{ category.title }}</h3>
+{% endblock %}
+
+{% block next_page_url %}
+    {% url 'blog:category' category.slug  page_obj.next_page_number %}
+{% endblock %}
+{% block previous_page_url %}
+    {% url 'blog:category' category.slug  page_obj.previous_page_number %}
+{% endblock %}
+
+
+
+
+
+
+{#{% block pagination %}#}
+{#    {% if page_obj.has_next %}#}
+{#        <a class="btn btn-primary text-uppercase "#}
+{#           href="{% url 'blog:category' category.slug  page_obj.next_page_number %}">→ پست های قدیمی </a>#}
+{#    {% endif %}#}
+{##}
+{#    {% if page_obj.has_previous %}#}
+{#        <a class="btn btn-primary text-uppercase  me-lg-3"#}
+{#           href="{% url 'blog:category' category.slug  page_obj.previous_page_number %}">#}
+{#            &larr; پست های جدید </a>#}
+{#    {% endif %}#}
+{#{% endblock %}#}

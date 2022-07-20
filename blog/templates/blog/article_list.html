@@ -1,0 +1,38 @@
+{% extends 'blog/list.html' %}
+
+{% block next_page_url %}
+    {% url 'blog:home' page_obj.next_page_number %}
+{% endblock %}
+{% block previous_page_url %}
+    {% url 'blog:home' page_obj.previous_page_number %}
+{% endblock %}
+
+
+
+
+
+
+{#{% block pagination %}#}
+{#    <nav aria-label="Page navigation example">#}
+{#        {% if page_obj.has_other_pages %}#}
+{#            <ul class="pagination">#}
+{#                {% if page_obj.has_previous %}#}
+{#                    <li class="page-item"><a class="page-link"#}
+{#                                             href="{% url 'blog:home' page_obj.previous_page_number %}">Previous</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                {% for i in page_numbers %}#}
+{#                    {% if page_obj.number == i %}#}
+{#                        <li class="page-item"><a class="page-link" href="#">current</a></li>#}
+{#                    {% else %}#}
+{#                        <li class="page-item"><a class="page-link" href="{% url 'blog:home' i %}">{{ i }}</a></li>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#                {% if page_obj.has_next %}#}
+{#                    <li class="page-item"><a class="page-link"#}
+{#                                             href="{% url 'blog:home' page_obj.next_page_number %}">Next</a></li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+{#    </nav>#}
+{#{% endblock %}#}
