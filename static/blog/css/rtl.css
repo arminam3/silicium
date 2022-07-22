@@ -17,6 +17,11 @@ body{
     text-align: right;
     font-size: 14px;
 }
+
+.my_font {
+    font-family: Sahel !important;
+}
+
 .navbar-nav {
     margin-left: initial !important;
     margin-right: auto;

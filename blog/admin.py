@@ -28,18 +28,27 @@ def make_draft(modeladmin, request, queryset):
         updated
     ) % updated, messages.SUCCESS)
 
+def make_armin(modeladmin, request, queryset):
+    updated = queryset.update(author=1)
+    modeladmin.message_user(request,
+                           '%d مورد تغییر یافت' % updated,
+                            messages.SUCCESS
+                            )
+
+
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'image_tag', 'status', 'jalali_published', 'category_to_str']
-    list_editable = ['status']
-    list_filter = ['status']
+    list_display = ['title', 'image_tag', 'author', 'status', 'jalali_published', 'category_to_str']
+    list_editable = ['status', 'author']
+    list_filter = ['status', 'author']
     search_fields = ['title', 'status']
     prepopulated_fields = {'slug': ('title',)}
     ordering = ['created']
 
-    actions = [make_published, make_draft]
+    actions = [make_published, make_draft, make_armin]
     make_published.short_description = 'منتشر کردن'
     make_draft.short_description = 'پیش نویس کردن'
+    make_armin.short_description = 'Armin'
 
     def category_to_str(self, obj):
         return ', '.join([category.title for category in obj.category_published()])
