@@ -17,4 +17,21 @@ body {
 .btn-show-pass {
     left: 0;
     right:initial;
+
+}
+
+.error{
+    color:red;
+    background-color: rgba(253, 131, 131, 0.84);
+    font-size:18px;
+    padding:20px;
+    text-align: center;
+}
+
+.error-field{
+    color:red;
+    background-color: rgba(253, 129, 129, 0.84);
+    font-size:18px;
+    padding:10px 20px;
+    text-align: center;
 }

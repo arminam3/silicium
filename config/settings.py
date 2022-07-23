@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     #installed_app
     'extensions',
+    'widget_tweaks',
 
     #my-app
     'blog.apps.BlogConfig',
