@@ -1,0 +1,12 @@
+@font-face {
+  font-family: Sahel;
+  src: url('../../../blog/css/Sahel.eot');
+  src: url('../../../blog/css/Sahel.eot?#iefix') format('embedded-opentype'),
+       url('../../../blog/css/Sahel.woff2') format('woff2'),
+       url('../../../blog/css/Sahel.woff') format('woff'),
+       url('../../../blog/css/Sahel.ttf') format('truetype');
+}
+
+*{
+    font-family:Sahel !important;
+}

@@ -42,11 +42,16 @@ INSTALLED_APPS = [
     #installed_app
     'extensions',
     'widget_tweaks',
+    'crispy_forms',
 
     #my-app
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig'
 ]
+#
+# INSTALLED_APPS = [
+#     'crispy_forms'
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,6 +138,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = reverse_lazy('account:login')
 LOGIN_REDIRECT_URL = reverse_lazy('account:home')
+
+AUTH_USER_MODEL = 'account.CustomUser'
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 # Default primary key field type

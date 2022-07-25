@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from extensions.utils import jalali_convertor
-from django.contrib.auth.models import User
+from account.models import CustomUser
+from django.utils.html import format_html
+
+
 #My-Manager
 
 class ArticleManager(models.Manager):
@@ -30,11 +33,11 @@ class Article(models.Model):
         ('p', 'منتشر شده '),
     )
 
-    author = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='نویسنده', related_name='article')
+    author = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='نویسنده', related_name='article')
     title = models.CharField(max_length=100, verbose_name='عنوان مقاله')
-    slug = models.SlugField(max_length=100, unique=True, verbose_name='توضیحات')
+    slug = models.SlugField(max_length=100, unique=True, verbose_name='آدرس مقاله')
     category = models.ManyToManyField('Category', related_name='article', verbose_name= 'دسته بندی')
-    descriptions = models.TextField(verbose_name='آدرس مقاله')
+    descriptions = models.TextField(verbose_name='توضیحات')
     thumbnail = models.ImageField(upload_to="images", verbose_name='تصویر')
     published = models.DateTimeField(default=timezone.now, verbose_name='زمان انتشار')
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ایجاد')
@@ -55,8 +58,16 @@ class Article(models.Model):
 
 
 
+
+    def category_to_str(self):
+        if self.category_published():
+            return ', '.join([category.title for category in self.category_published()])
+        else:
+            return '_________'
+
+    category_to_str.short_description = 'دسته بندی ها'
+
     def image_tag(self):
-        from django.utils.html import format_html
         return format_html('<img style="border-radius :3px" src="%s" width="100" height="75" />' % (self.thumbnail.url))
     image_tag.short_description = 'عکس'
 

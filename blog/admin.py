@@ -1,15 +1,36 @@
 from django.contrib import admin
 from django.utils.translation import ngettext
 from django.contrib import messages
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
+
 
 from .models import Article, Category
+
+UserAdmin.fieldsets[2][1]['fields'] = (
+    "is_active",
+    "is_staff",
+    "is_superuser",
+    "is_author",
+    "special_user",
+    "groups",
+    "user_permissions",
+)
+UserAdmin.list_display += (
+    'is_author',
+    'is_special_user',
+)
+
+
+admin.site.register(get_user_model(), UserAdmin)
 
 # def make_published(modeladmin, request, queryset):
 #     queryset.update(status='p')
 
 
 admin.site.site_header = 'وبلاگ جنگویی'
-admin.site.disable_action('delete_selected')
+# admin.site.disable_action('delete_selected')
 # @admin.action(description='Mark selected stories as published')
 def make_published(modeladmin, request, queryset):
     updated = queryset.update(status='p')
@@ -50,10 +71,10 @@ class ArticleAdmin(admin.ModelAdmin):
     make_draft.short_description = 'پیش نویس کردن'
     make_armin.short_description = 'Armin'
 
-    def category_to_str(self, obj):
-        return ', '.join([category.title for category in obj.category_published()])
+    # def category_to_str(self, obj):
+    #     return ', '.join([category.title for category in obj.category_published()])
 
-    category_to_str.short_description = 'دسته بندی ها'
+
 
 
 

@@ -1,2 +1,68 @@
-home page
-{{ user.get_full_name }}
+{% extends 'registration/adminlte/_base.html' %}
+
+{% block title %}{% block title-meta %}
+    لیست مقالات
+{% endblock %}{% endblock %}
+{% block main %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>عنوان</th>
+                        <th>آدرس مقاله</th>
+                        <th>نویسنده</th>
+                        <th>دسته بندی</th>
+                        <th>تاریخ انتشار</th>
+                        <th>تصویر</th>
+                        <th>توضیحات</th>
+                        <th>وضعیت</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in object_list %}
+                        <tr>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.slug }}</td>
+                            <td>{{ article.author.get_full_name }}</td>
+                            <td>{{ article.category_to_str }}</td>
+                            <td>{{ article.jalali_published }}</td>
+                            <td>{{ article.image_tag }}</td>
+                            <td>{{ article.descriptions|truncatewords:12 |safe}}</td>
+                            <td>
+                            {% if article.status == 'p' %}
+                                    <span class="right badge badge-success">منتشر شده</span>
+                                <a href="{% url 'blog:article_detail' article.slug %}" target="_blank">
+                                    <span class="right badge badge-info">نمایش در سایت</span>
+                                </a>
+                            {% else %}
+                                    <span class="right badge badge-danger">پیش نویس</span>
+
+                            {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+{% endblock %}
