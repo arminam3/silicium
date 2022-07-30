@@ -1,0 +1,25 @@
+{% extends 'registration/home.html' %}
+
+
+{% block title %}
+    حذف مقاله
+{% endblock %}
+{% block main %}
+<div class="col-md-8 text-center mx-auto">
+    <!-- general form elements -->
+    <div class="card card-danger">
+        <div class="card-header">
+            <h3 class="card-title mb-0 float-left">حذف مقاله </h3>
+        </div>
+        <div class="card-body py-4">
+            <form action="" method="POST" enctype="multipart/form-data">    {% csrf_token %}
+                <p class="text-center py-2">آیا مطمئن هستید که می خواهید مقاله <b>{{ article.title }}</b> راحذف کنید؟</p>
+                {{ form }}
+                <button class="btn btn-danger">
+                    حذف
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

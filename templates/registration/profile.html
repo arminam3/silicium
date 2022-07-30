@@ -1,0 +1,50 @@
+{% extends 'registration/adminlte/_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% block title-meta %}
+    صفحه ی پروفایل
+{% endblock %}{% endblock %}
+{% block main %}
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title mb-0 float-left text-justify">پروفایل </h3>
+                </div>
+    <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                        <label class="my-4">گذرواژه:</label>
+                         <span>برای تغییر گذرواژه <a href="{% url 'account:password_change' %}">کلیک </a> کنید</span>
+                    </div>
+                    <div class="col-6">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.special_user|as_crispy_field }}
+                    </div>
+                    <div class="col-6 ">
+                        {{ form.is_author|as_crispy_field }}
+                    </div>
+                </div>
+                <button class="btn btn-success">ارسال مقاله</button>
+                {% if user.is_superuser and request.resolver_match.url_name == 'article_update' %}
+                        <a href="{% url 'account:article_delete' article.slug %}" class="btn btn-danger">حذف مقاله</a>
+                {% endif %}
+    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

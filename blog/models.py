@@ -31,6 +31,9 @@ class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'پیش نویس'),
         ('p', 'منتشر شده '),
+        ('i', 'در حال بررسی'),
+        ('b', 'برگشت داده شده'),
+
     )
 
     author = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='نویسنده', related_name='article')
@@ -42,6 +45,7 @@ class Article(models.Model):
     published = models.DateTimeField(default=timezone.now, verbose_name='زمان انتشار')
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ایجاد')
     updated = models.DateTimeField(auto_now=True, verbose_name='زمان وآخرین ویرایش')
+    is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه  ')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='وضعیت انتشار')
 
 

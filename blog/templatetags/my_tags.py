@@ -16,5 +16,14 @@ def category_nav():
     'categories': Category.objects.filter(status=True),
     }
 
+@register.inclusion_tag("blog/partial/current_page.html")
+def current_page(request, link_name, content, classes):
+    return {
+        "request" : request,
+        "link_name": link_name,
+        "content": content,
+        "link": f"account:{link_name}",
+        "classes": classes,
+    }
 
 

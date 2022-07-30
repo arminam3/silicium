@@ -52,13 +52,15 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{% url 'account:home' %}" class="nav-link">صفحه اصلی</a>
-            </li>
+            {% if user.is_superuser or user.is_author %}
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{% url 'account:home' %}" class="nav-link">صفحه اصلی</a>
+                </li>
+            {% endif %}
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{% url 'blog:home' %}" class="nav-link" target="_blank">نمایش سایت</a>
             </li>
-        </ul>
+
 
         <!-- SEARCH FORM -->
         <form class="form-inline ml-3">
@@ -71,6 +73,16 @@
                 </div>
             </div>
         </form>
+
+        </ul>
+            <ul class="navbar-nav mr-auto-navbav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'account:logout' %}">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+    </ul>
+
 
         <!-- Right navbar links -->
     </nav>

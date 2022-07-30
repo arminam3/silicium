@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Article, Category
 
+from django.contrib.auth.admin import UserAdmin
 UserAdmin.fieldsets[2][1]['fields'] = (
     "is_active",
     "is_staff",
@@ -59,7 +60,7 @@ def make_armin(modeladmin, request, queryset):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'image_tag', 'author', 'status', 'jalali_published', 'category_to_str']
+    list_display = ['title', 'image_tag', 'author', 'is_special', 'status', 'jalali_published', 'category_to_str']
     list_editable = ['status', 'author']
     list_filter = ['status', 'author']
     search_fields = ['title', 'status']

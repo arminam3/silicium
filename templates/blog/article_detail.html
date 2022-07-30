@@ -15,6 +15,12 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
                         <h1>{{ article.title |title }}</h1>
+
+                                {% if article.is_special %}
+                                    <span class="badge badge-danger" style="font-size: 14px">
+                                        ویژه
+                                    </span>
+                                {% endif %}
                         <time>{{ article.jalali_published }}</time>
 
                         {#                        <span class="subheading">A Blog Theme by Start Bootstrap</span>#}
@@ -28,9 +34,20 @@
     <article>
         <div class="container">
             <div class="row">
+                <div class="col-lg-12  col-md-10 mx-auto text-justify">
+                {% if article.is_special %}
+                    {% if user.is_authenticated and user.is_special_user or article.author == user or user.is_superuser %}
+                            {{ article.descriptions|safe }}
+                    {% else %}
+                            {{ article.descriptions|safe|truncatewords:30 }}
+                        <p class="alert alert-warning">این مقاله ویژه است و باید برای مشاهده آن <a href="#"  class="alert-link">اشتراک ویژه </a>تهیه کنید. </p>
+                    {% endif %}
+                    </div>
+                {% else %}
                 <div class="col-lg-8  col-md-10 mx-auto text-justify">
                     {{ article.descriptions|safe }}
                 </div>
+                {% endif %}
             </div>
         </div>
     </article>
@@ -50,7 +67,7 @@
     {#                <hr class="my-4"/>#}
     {##}
     {#                <!-- Pager-->#}
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'blog:home' %}"> → صفحه اصلی </a></div>
+                    <div class="d-flex justify-content-end mb-4 my-4"><a class="btn btn-primary text-uppercase" href="{% url 'blog:home' %}"> → صفحه اصلی </a></div>
                 </div>
     {#        </div>#}
     {#    </div>#}
