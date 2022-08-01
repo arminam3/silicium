@@ -3,6 +3,8 @@ from django.utils import timezone
 from extensions.utils import jalali_convertor
 from account.models import CustomUser
 from django.utils.html import format_html
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 #My-Manager
@@ -46,6 +48,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ایجاد')
     updated = models.DateTimeField(auto_now=True, verbose_name='زمان وآخرین ویرایش')
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه  ')
+    comments = GenericRelation(Comment)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='وضعیت انتشار')
 
 

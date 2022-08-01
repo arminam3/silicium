@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load comment_tags %}
 {% block title %}
     This Is me | {{ article.title }}
 {% endblock %}
@@ -71,6 +72,7 @@
                 </div>
     {#        </div>#}
     {#    </div>#}
-
+{% render_comments article request %}
+{% include_bootstrap %}
 
 {% endblock %}
