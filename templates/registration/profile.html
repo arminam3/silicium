@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-12">
                         <label class="my-4">گذرواژه:</label>
-                         <span>برای تغییر گذرواژه <a href="{% url 'account:password_change' %}">کلیک </a> کنید</span>
+                         <span>برای تغییر گذرواژه <a href="{% url 'password_change' %}">کلیک </a> کنید</span>
                     </div>
                     <div class="col-6">
                         {{ form.first_name|as_crispy_field }}
@@ -41,7 +41,7 @@
                 </div>
                 <button class="btn btn-success">ارسال مقاله</button>
                 {% if user.is_superuser and request.resolver_match.url_name == 'article_update' %}
-                        <a href="{% url 'account:article_delete' article.slug %}" class="btn btn-danger">حذف مقاله</a>
+                        <a href="{% url 'article_delete' article.slug %}" class="btn btn-danger">حذف مقاله</a>
                 {% endif %}
     </form>
             </div>

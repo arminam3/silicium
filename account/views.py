@@ -1,11 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from .forms import ProfileForm
-from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth.views import LoginView, PasswordResetConfirmView
+from django.contrib.auth import login
+from django.core.mail import send_mail
+from django.conf import settings
+from verify_email.email_handler import send_verification_email
+from django.contrib.auth.forms import UserCreationForm
 
 from .mixins import (
                     FieldMixin,
@@ -15,6 +20,7 @@ from .mixins import (
                     IsAuthorMixin,
                     )
 from blog.models import Article
+from .forms import SignupForm
 
 
 class ArticleListView(LoginRequiredMixin,IsAuthorMixin, generic.ListView):
@@ -78,11 +84,29 @@ class ProfileView(LoginRequiredMixin, generic.UpdateView):
         return kwargs
 
 class CustomLoginView(LoginView):
+
     def get_success_url(self):
         if self.request.user.is_superuser or self.request.user.is_author:
             return reverse_lazy('account:home')
         else:
             return reverse_lazy('account:profile')
 
-class CustomPasswordChangeView(PasswordChangeView):
-    success_url = reverse_lazy('account:password_change_done')
+class RegisterView(generic.CreateView):
+    # model = get_user_model()
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
+
+
+
+
+
+
+
+
+
+
+
+
+# class CustomPasswordChangeView(PasswordChangeView):
+#     success_url = reverse_lazy('account:password_change_done')
