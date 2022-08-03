@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_gravatar',
     'comment',
+    'rest_framework',
+
 
     #my-app
     'blog.apps.BlogConfig',
@@ -146,7 +148,8 @@ LOGOUT_REDIRECT_URL = reverse_lazy('login')
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 import decouple
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')

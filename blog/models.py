@@ -48,7 +48,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ایجاد')
     updated = models.DateTimeField(auto_now=True, verbose_name='زمان وآخرین ویرایش')
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه  ')
-    comments = GenericRelation(Comment)
+    comments = GenericRelation(Comment, related_name="article")
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='وضعیت انتشار')
 
 
